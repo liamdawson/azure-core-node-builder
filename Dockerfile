@@ -1,13 +1,13 @@
-FROM buildpack-deps:jessie-scm
+FROM buildpack-deps:xenial-scm
 
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends python3 libc6 libcurl3 libgcc1 libgssapi-krb5-2 libicu52 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python3-dev
+RUN apt-get install -y --no-install-recommends python3 libc6 libcurl3 libgcc1 libgssapi-krb5-2 libicu55 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python3-dev
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-RUN bash <(curl -fsSL https://raw.githubusercontent.com/PowerShell/PowerShell/v6.0.0-alpha.18/tools/download.sh)
+RUN curl -fsSL https://raw.githubusercontent.com/PowerShell/PowerShell/v6.0.0-alpha.18/tools/download.sh | bash
 
 # Install .NET Core SDK 1.0.4
 ENV DOTNET_SDK_VERSION 1.0.1
