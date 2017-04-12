@@ -78,3 +78,5 @@ RUN set -ex \
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 RUN pip install azure-cli
+
+RUN npm install -g raml2html@6.1.0

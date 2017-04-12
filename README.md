@@ -4,3 +4,4 @@ Docker build image with the following:
 * Node 7.8.0 (w/ yarn)
 * Azure CLI 2.0
 * Latest Powershell alpha
+* raml2html 6.1.0
