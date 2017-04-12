@@ -2,7 +2,7 @@ FROM buildpack-deps:xenial-scm
 
 # Dotnet core is picky about libicu version
 RUN wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-8ubuntu0.2_amd64.deb
-RUN sudo dpkg -i libicu52_52.1-8ubuntu0.2_amd64.deb
+RUN dpkg -i libicu52_52.1-8ubuntu0.2_amd64.deb
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends python3 libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python3-dev sudo
