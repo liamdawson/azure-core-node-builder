@@ -13,7 +13,7 @@ RUN groupadd --gid 1000 node \
 
 RUN curl -fsSL https://raw.githubusercontent.com/PowerShell/PowerShell/v6.0.0-alpha.18/tools/download.sh | bash
 
-# Install .NET Core SDK 1.0.4
+# Install .NET Core SDK 1.0.1
 ENV DOTNET_SDK_VERSION 1.0.1
 ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev-debian-x64.$DOTNET_SDK_VERSION.tar.gz
 
