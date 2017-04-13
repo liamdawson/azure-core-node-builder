@@ -5,7 +5,7 @@ RUN wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-8ubuntu
 RUN dpkg -i libicu52_52.1-8ubuntu0.2_amd64.deb
 
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends python3 libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python3-dev sudo
+RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 node \
@@ -76,7 +76,7 @@ RUN set -ex \
   && mv yarn.js /usr/local/bin/yarn \
   && chmod +x /usr/local/bin/yarn
 
-RUN curl https://bootstrap.pypa.io/get-pip.py | python3
-RUN pip install azure-cli
+RUN curl https://bootstrap.pypa.io/get-pip.py | python
+RUN pip install azure-cli azure
 
 RUN npm install -g raml2html@6.1.0
