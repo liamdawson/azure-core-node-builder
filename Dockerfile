@@ -11,7 +11,11 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-RUN curl -fsSL https://raw.githubusercontent.com/PowerShell/PowerShell/v6.0.0-alpha.18/tools/download.sh | bash
+ENV POWERSHELL_DEB_URL https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-alpha.18/powershell_6.0.0-alpha.18-1ubuntu1.16.04.1_amd64.deb
+
+RUN curl -SL $POWERSHELL_DEB_URL --output ps.deb
+RUN dpkg -i ps.deb
+RUN rm ps.deb
 
 # Install .NET Core SDK 1.0.1
 ENV DOTNET_SDK_VERSION 1.0.1
