@@ -2,7 +2,7 @@ FROM buildpack-deps:trusty-scm
 
 RUN apt-get update
 RUN apt-get install apt-transport-https
-RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu52 dotnet-dev-1.0.1
