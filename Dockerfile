@@ -1,7 +1,9 @@
 FROM buildpack-deps:trusty-scm
 
+RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu52
+RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu52 dotnet-dev-1.0.1
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 node \
@@ -12,16 +14,6 @@ ENV POWERSHELL_DEB_URL https://github.com/PowerShell/PowerShell/releases/downloa
 RUN curl -SL $POWERSHELL_DEB_URL --output ps.deb
 RUN dpkg -i ps.deb
 RUN rm ps.deb
-
-# Install .NET Core SDK 1.0.1
-ENV DOTNET_SDK_VERSION 1.0.1
-ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev-debian-x64.$DOTNET_SDK_VERSION.tar.gz
-
-RUN curl -SL $DOTNET_SDK_DOWNLOAD_URL --output dotnet.tar.gz \
-    && mkdir -p /usr/share/dotnet \
-    && tar -zxf dotnet.tar.gz -C /usr/share/dotnet \
-    && rm dotnet.tar.gz \
-    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 
 # Trigger the population of the local package cache
 ENV NUGET_XMLDOC_MODE skip
