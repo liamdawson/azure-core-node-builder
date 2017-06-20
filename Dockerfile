@@ -1,7 +1,7 @@
 FROM buildpack-deps:trusty-scm
 
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu52
+RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu52 libicu55
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 node \
