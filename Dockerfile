@@ -7,14 +7,14 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-ENV POWERSHELL_DEB_URL https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-alpha.18/powershell_6.0.0-alpha.18-1ubuntu1.14.04.1_amd64.deb
+ENV POWERSHELL_DEB_URL https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-beta.2/powershell_6.0.0-beta.2-1ubuntu1.16.04.1_amd64.deb
 
 RUN curl -SL $POWERSHELL_DEB_URL --output ps.deb
 RUN dpkg -i ps.deb
 RUN rm ps.deb
 
-# Install .NET Core SDK 1.0.1
-ENV DOTNET_SDK_VERSION 1.0.1
+# Install .NET Core SDK 1.0.4
+ENV DOTNET_SDK_VERSION 1.0.4
 ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev-debian-x64.$DOTNET_SDK_VERSION.tar.gz
 
 RUN curl -SL $DOTNET_SDK_DOWNLOAD_URL --output dotnet.tar.gz \
@@ -32,9 +32,9 @@ RUN mkdir warmup \
     && rm -rf warmup \
     && rm -rf /tmp/NuGetScratch
 
-# Install nodejs 7.8.0
+# Install nodejs 8.1.2
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 7.8.0
+ENV NODE_VERSION 8.1.2
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
@@ -61,7 +61,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
     && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 0.21.3
+ENV YARN_VERSION 0.24.6
 
 RUN set -ex \
   && for key in \
@@ -77,9 +77,9 @@ RUN set -ex \
   && chmod +x /usr/local/bin/yarn
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
-RUN pip install azure-cli azure
+RUN curl -L https://aka.ms/InstallAzureCli | bash
 
 RUN az component update --add storage
 RUN az component update --add batch
 
-RUN npm install -g raml2html@6.1.0
+RUN npm install -g raml2html@6.3.0
