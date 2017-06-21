@@ -1,13 +1,13 @@
 FROM buildpack-deps:trusty-scm
 
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu52 libicu55
+RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu52
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-ENV POWERSHELL_DEB_URL https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-beta.2/powershell_6.0.0-beta.2-1ubuntu1.16.04.1_amd64.deb
+ENV POWERSHELL_DEB_URL https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-beta.2/powershell_6.0.0-beta.2-1ubuntu1.14.04.1_amd64.deb
 
 RUN curl -SL $POWERSHELL_DEB_URL --output ps.deb
 RUN dpkg -i ps.deb
