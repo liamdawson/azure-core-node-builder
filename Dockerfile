@@ -82,7 +82,7 @@ RUN set -ex \
   && chmod +x /usr/local/bin/yarn
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
-RUN pip install azure azure-cli
+RUN pip install azure 'azure-cli==2.0.9'
 
 RUN az component update --add storage
 RUN az component update --add batch
