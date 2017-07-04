@@ -1,5 +1,7 @@
 FROM buildpack-deps:xenial-scm
 
+ENV LANG="en_US.UTF-8"
+
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu55 liblttng-ust0 liblldb-3.6 curl apt-transport-https
