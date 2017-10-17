@@ -8,6 +8,8 @@ Docker build image with the following:
 * Latest Powershell beta
 * raml2html 6.3.0
 * default ubuntu 16.04 JRE (headless)
+* Chrome (stable)
+* Selenium Server standalone (6.3.0)
 
 ## License
 
