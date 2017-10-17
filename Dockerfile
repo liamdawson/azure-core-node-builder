@@ -2,11 +2,15 @@ FROM buildpack-deps:xenial-scm
 
 ENV LANG="en_US.UTF-8"
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y apt-transport-https
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/microsoft.list
+RUN curl https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN echo "deb https://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/chrome.list
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
   python \
@@ -31,7 +35,9 @@ RUN apt-get install -y --no-install-recommends \
   liblldb-3.6 \
   curl \
   default-jre-headless \
-  powershell
+  powershell \
+  wget \
+  google-chrome-stable
 
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -112,3 +118,15 @@ RUN az component update --add storage
 RUN az component update --add batch
 
 RUN npm install -g raml2html@6.3.0
+
+ENV SELENIUM_SHORT_VERSION=3.6
+ENV SELENIUM_VERSION=3.6.0
+ENV SELENIUM_DOWNLOAD_URL=https://selenium-release.storage.googleapis.com/${SELENIUM_SHORT_VERSION}/selenium-server-standalone-${SELENIUM_VERSION}.jar
+
+RUN mkdir -p /opt/selenium
+RUN wget ${SELENIUM_DOWNLOAD_URL} -O /opt/selenium/selenium-server-standalone.jar
+
+# https://github.com/SeleniumHQ/docker-selenium/issues/87
+ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+
