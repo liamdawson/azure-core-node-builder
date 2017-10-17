@@ -7,6 +7,7 @@ Docker build image with the following:
 * Azure CLI 2.0
 * Latest Powershell beta
 * raml2html 6.3.0
+* default ubuntu 16.04 JRE (headless)
 
 ## License
 

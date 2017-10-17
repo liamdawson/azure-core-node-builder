@@ -4,11 +4,34 @@ ENV LANG="en_US.UTF-8"
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y --no-install-recommends python libc6 libcurl3 libgcc1 libgssapi-krb5-2 liblttng-ust0 libssl1.0.0 libssl-dev libstdc++6 libunwind8 libuuid1 zlib1g xz-utils build-essential libffi-dev python-dev sudo libicu55 liblttng-ust0 liblldb-3.6 curl apt-transport-https
+RUN apt-get install -y apt-transport-https
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
+RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/microsoft.list
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends powershell
+RUN apt-get install -y --no-install-recommends \
+  python \
+  libc6 \
+  libcurl3 \
+  libgcc1 \
+  libgssapi-krb5-2 \
+  liblttng-ust0 \
+  libssl1.0.0 \
+  libssl-dev \
+  libstdc++6 \
+  libunwind8 \
+  libuuid1 \
+  zlib1g \
+  xz-utils \
+  build-essential \
+  libffi-dev \
+  python-dev \
+  sudo \
+  libicu55 \
+  liblttng-ust0 \
+  liblldb-3.6 \
+  curl \
+  default-jre-headless \
+  powershell
 
 RUN rm -rf /var/lib/apt/lists/*
 
